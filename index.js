@@ -68,6 +68,7 @@ function writeToFile () {
     // Create Shape Parameters
     let shapeOptions;
     if (answers.shape === triangles)
+    
 
 }
 
