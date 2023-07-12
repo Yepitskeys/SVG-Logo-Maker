@@ -51,14 +51,14 @@ const questions = ([
         ]
       },
 ])
-.then((answers) => {
-    if (answers.text.length > 3) {
-        console.log("Please no more than 3 characters for your text!");
-        questions();
-    } else {
-        writeToFile('logo.svg', answers);
-    }
-});
+// .then((answers) => {
+//     if (answers.text.length > 3) {
+//         console.log("Please no more than 3 characters for your text!");
+//         questions();
+//     } else {
+//         writeToFile('logo.svg', answers);
+//     }
+// });
 
 // Error if logo text is more than 3 character
 
@@ -87,3 +87,5 @@ function init() {
   })
 
 };
+
+init ();
