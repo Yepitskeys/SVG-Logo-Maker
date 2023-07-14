@@ -51,31 +51,44 @@ const questions = ([
         ]
       },
 ])
-// .then((answers) => {
-//     if (answers.text.length > 3) {
-//         console.log("Please no more than 3 characters for your text!");
-//         questions();
-//     } else {
-//         writeToFile('logo.svg', answers);
-//     }
-// });
-
-// Error if logo text is more than 3 character
 
 // Function to write svg file
 function writeToFile (fileName, answers) {
-    let svgContainer = '';
-    svgContainer = '<svg version="1.1" width="300" height="200">';
+    let svgContainer = "";
 
     // Create Shape Parameters
     let shapeOptions;
-    if (answers.shape === "Triangle") {
-        shapeOptions = new Triangle();
-        // Need to combine to svgContainer and the parameters pulled in from Triangle
-        svgContainer = `<polygon points="150, 18 244, 182 56, 182" fill="${answers.shapeColor}" />`
-    }
+    if (answers.shape === "Circle") {
+        const circle = new Circle();
+        circle.changeColor(answers.color)
+        svgContainer = `
+            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${circle.render()} 
+            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            </svg>`;
 
-}
+    } if (answers.shape === "Triangle") {
+        const triangle = new Triangle();
+        triangle.changeColor(answers.color)
+        svgContainer = `
+            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${triangle.render()} 
+            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            </svg>`;
+
+    } if (answers.shape === "Square") {
+        const square = new Square();
+        square.changeColor(answers.color)
+        svgContainer = `
+        <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${square.render()} 
+            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            </svg>`;
+    }
+    fs.writeFile(fileName, svgContainer, (err) => {
+        err ? console.log(err) : console.log("Generated logo.svg");
+      });
+};
 
 // Function to initialize app
 function init() {
@@ -83,9 +96,14 @@ function init() {
 
   inquirer.prompt(questions)
   .then((answers) => {
-      writeToFile('logo.svg', answers);
-  })
-
+    // Error if logo text is more than 3 character
+    if (answers.text.length > 3) {
+        console.log("Please no more than 3 characters for your text!");
+        init();
+    } else {
+    writeToFile('logo.svg', answers);
+    }
+ });
 };
 
 init ();
