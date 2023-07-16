@@ -60,29 +60,29 @@ function writeToFile (fileName, answers) {
     let shapeOptions;
     if (answers.shape === "Circle") {
         const circle = new Circle();
-        circle.changeColor(answers.color)
+        circle.changeColor(answers.shapeColor)
         svgContainer = `
-            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            <svg version="1.1" width="300px" height="200px" xmlns="http://www.w3.org/2000/svg">
             ${circle.render()} 
-            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            <text x="150" y="130" text-anchor="middle" font-size="30" fill="${answers.textColor}">${answers.text}</text>
             </svg>`;
 
     } if (answers.shape === "Triangle") {
         const triangle = new Triangle();
-        triangle.changeColor(answers.color)
+        triangle.changeColor(answers.shapeColor)
         svgContainer = `
-            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            <svg version="1.1" width="300px" height="200px" xmlns="http://www.w3.org/2000/svg">
             ${triangle.render()} 
-            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            <text x="150" y="130" text-anchor="middle" font-size="30" fill="${answers.textColor}">${answers.text}</text>
             </svg>`;
 
     } if (answers.shape === "Square") {
         const square = new Square();
-        square.changeColor(answers.color)
+        square.changeColor(answers.shapeColor)
         svgContainer = `
-        <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+        <svg version="1.1" width="300px" height="200px" xmlns="http://www.w3.org/2000/svg">
             ${square.render()} 
-            <text x="150" y="130" text-anchor="middle" font-size="3" fill="${answers.textColor}">${answers.text}</text>
+            <text x="150" y="130" text-anchor="middle" font-size="30" fill="${answers.textColor}">${answers.text}</text>
             </svg>`;
     }
     fs.writeFile(fileName, svgContainer, (err) => {
